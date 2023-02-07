@@ -1,7 +1,8 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 import './App.css'
 import SearchIcon from './search.svg'
+import MovieCard from './MovieCard';
 
 const API_address = 'http://www.omdbapi.com?apikey=a0a889e7' 
 const movie1 = {
@@ -13,10 +14,14 @@ const movie1 = {
 }
 
 const App = () => {
+    //default value = empty array
+    const [moviesList, setMoviesList] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
     const searchMovies = async(name) => {
         const API_response = await fetch(`${API_address}&s=${name}`);
         const data = await API_response.json();
-        console.log(data.Search);
+        setMoviesList(data.Search);
     }
 
     useEffect(() => {
@@ -29,21 +34,34 @@ const App = () => {
             <div className = "search">
                 <input
                     placeholder = "Type here to search a movie..."
-                    value = "whatever"
-                    onChange = {() => {}}
+                    value = {searchTerm}
+                    onChange = {(event) => setSearchTerm(event.target.value)}
                 />
                 <img
                     src = {SearchIcon}
                     alt = "search"
-                    onClick = {() => {}}
+                    onClick = {() => searchMovies(searchTerm)}
                 />
             </div>
-            <div className = "container">
-                <div className = "movie">
-                    <div>
-                        <p>{movie1.Year}</p>
-                    </div>
+
+            {/*down below is a dynamic block of code*/}
+            {
+                moviesList?.length > 0 ? (
+                <div className = "container">
+                    {moviesList.map((movie) => (
+                        <MovieCard givenMovie = {movie} />
+                    ))}
                 </div>
+                ) :
+                (
+                    <div className = "empty">
+                        <h2>No movies found!</h2>
+                    </div>
+                )
+            }
+
+            <div className = "container">
+                <MovieCard givenMovie = {movie1} />
             </div>
         </div>
     );
