@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# MovieFinder - Small React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is small project is my first React Application. It also uses the OMDb API for fetching information about movies.
 
 ## Available Scripts
 
