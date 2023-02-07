@@ -5,13 +5,6 @@ import SearchIcon from './search.svg'
 import MovieCard from './MovieCard';
 
 const API_address = 'http://www.omdbapi.com?apikey=a0a889e7' 
-const movie1 = {
-    "Title": "Whatever",
-    "Year": "1998",
-    "imdbID": "tt0140688",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BZmI4ZDE5NTgtYTg0Ny00MzEzLTlhOWMtMmFjZDQyZDc2OWViXkEyXkFqcGdeQXVyNzc5MjA3OA@@._V1_SX300.jpg"
-}
 
 const App = () => {
     //default value = empty array
@@ -25,12 +18,12 @@ const App = () => {
     }
 
     useEffect(() => {
-        searchMovies('whatever');
+        searchMovies('spider');
     }, []);
 
     return (
         <div className = "app">
-            <h1>MovieWatch</h1>
+            <h1>MovieFinder</h1>
             <div className = "search">
                 <input
                     placeholder = "Type here to search a movie..."
@@ -59,10 +52,6 @@ const App = () => {
                     </div>
                 )
             }
-
-            <div className = "container">
-                <MovieCard givenMovie = {movie1} />
-            </div>
         </div>
     );
 }
